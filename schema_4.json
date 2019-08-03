@@ -26,97 +26,33 @@
           "description": "The number of rows displayed in the window upon first load.",
           "type": "integer"
         },
-        "requestedTheme": {
-          "default": "system",
-          "description": "\"Sets the theme of the application. Possible values: \"light\", \"dark\", \"system\"\"",
-          "type": "string"
-        },
-        "schemes": {
+        "keybindings": {
           "description": "TODO",
           "items": {
             "description": "TODO",
             "properties": {
-              "background": {
-                "description": "Sets the background color of the color scheme.",
+              "command": {
+                "description": "The command executed when the associated key bindings are pressed.",
                 "type": "string"
               },
-              "black": {
-                "description": "Sets the color used as ANSI black.",
-                "type": "string"
-              },
-              "blue": {
-                "description": "Sets the color used as ANSI blue.",
-                "type": "string"
-              },
-              "brightBlack": {
-                "description": "Sets the color used as ANSI bright black.",
-                "type": "string"
-              },
-              "brightBlue": {
-                "description": "Sets the color used as ANSI bright blue.",
-                "type": "string"
-              },
-              "brightCyan": {
-                "description": "Sets the color used as ANSI bright cyan.",
-                "type": "string"
-              },
-              "brightGreen": {
-                "description": "Sets the color used as ANSI bright green.",
-                "type": "string"
-              },
-              "brightPurple": {
-                "description": "Sets the color used as ANSI bright purple.",
-                "type": "string"
-              },
-              "brightRed": {
-                "description": "Sets the color used as ANSI bright red.",
-                "type": "string"
-              },
-              "brightWhite": {
-                "description": "Sets the color used as ANSI bright white.",
-                "type": "string"
-              },
-              "brightYellow": {
-                "description": "Sets the color used as ANSI bright yellow.",
-                "type": "string"
-              },
-              "cyan": {
-                "description": "Sets the color used as ANSI cyan.",
-                "type": "string"
-              },
-              "foreground": {
-                "description": "Sets the foreground color of the color scheme.",
-                "type": "string"
-              },
-              "green": {
-                "description": "Sets the color used as ANSI green.",
-                "type": "string"
-              },
-              "name": {
-                "description": "Name of the color scheme.",
-                "type": "string"
-              },
-              "purple": {
-                "description": "Sets the color used as ANSI purple.",
-                "type": "string"
-              },
-              "red": {
-                "description": "Sets the color used as ANSI red.",
-                "type": "string"
-              },
-              "white": {
-                "description": "Sets the color used as ANSI white.",
-                "type": "string"
-              },
-              "yellow": {
-                "description": "Sets the color used as ANSI yellow.",
-                "type": "string"
+              "keys": {
+                "description": "Defines the key combinations used to call the command.",
+                "items": {
+                  "description": "TODO",
+                  "type": "string"
+                },
+                "type": "array"
               }
             },
-            "required": [ "background", "black", "blue", "brightBlack", "brightBlue", "brightCyan", "brightGreen", "brightPurple", "brightRed", "brightWhite", "brightYellow", "cyan", "foreground", "green", "name", "purple", "red", "white", "yellow" ],
+            "required": [ "command", "keys" ],
             "type": "object"
           },
           "type": "array"
+        },
+        "requestedTheme": {
+          "default": "system",
+          "description": "\"Sets the theme of the application. Possible values: \"light\", \"dark\", \"system\"\"",
+          "type": "string"
         },
         "showTabsInTitlebar": {
           "default": true,
@@ -135,29 +71,6 @@
         }
       },
       "required": [ "alwaysShowTabs", "defaultProfile", "initialCols", "initialRows", "requestedTheme", "showTerminalTitleInTitlebar" ]
-    },
-    "keybindings": {
-      "description": "TODO",
-      "items": {
-        "description": "TODO",
-        "properties": {
-          "command": {
-            "description": "The command executed when the associated key bindings are pressed.",
-            "type": "string"
-          },
-          "keys": {
-            "description": "Defines the key combinations used to call the command.",
-            "items": {
-              "description": "TODO",
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "required": [ "command", "keys" ],
-        "type": "object"
-      },
-      "type": "array"
     },
     "profiles": {
       "description": "TODO",
@@ -307,9 +220,96 @@
       "minItems": 1,
       "type": "array",
       "uniqueItems": true
+    },
+    "schemes": {
+      "description": "TODO",
+      "items": {
+        "description": "TODO",
+        "properties": {
+          "background": {
+            "description": "Sets the background color of the color scheme.",
+            "type": "string"
+          },
+          "black": {
+            "description": "Sets the color used as ANSI black.",
+            "type": "string"
+          },
+          "blue": {
+            "description": "Sets the color used as ANSI blue.",
+            "type": "string"
+          },
+          "brightBlack": {
+            "description": "Sets the color used as ANSI bright black.",
+            "type": "string"
+          },
+          "brightBlue": {
+            "description": "Sets the color used as ANSI bright blue.",
+            "type": "string"
+          },
+          "brightCyan": {
+            "description": "Sets the color used as ANSI bright cyan.",
+            "type": "string"
+          },
+          "brightGreen": {
+            "description": "Sets the color used as ANSI bright green.",
+            "type": "string"
+          },
+          "brightPurple": {
+            "description": "Sets the color used as ANSI bright purple.",
+            "type": "string"
+          },
+          "brightRed": {
+            "description": "Sets the color used as ANSI bright red.",
+            "type": "string"
+          },
+          "brightWhite": {
+            "description": "Sets the color used as ANSI bright white.",
+            "type": "string"
+          },
+          "brightYellow": {
+            "description": "Sets the color used as ANSI bright yellow.",
+            "type": "string"
+          },
+          "cyan": {
+            "description": "Sets the color used as ANSI cyan.",
+            "type": "string"
+          },
+          "foreground": {
+            "description": "Sets the foreground color of the color scheme.",
+            "type": "string"
+          },
+          "green": {
+            "description": "Sets the color used as ANSI green.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the color scheme.",
+            "type": "string"
+          },
+          "purple": {
+            "description": "Sets the color used as ANSI purple.",
+            "type": "string"
+          },
+          "red": {
+            "description": "Sets the color used as ANSI red.",
+            "type": "string"
+          },
+          "white": {
+            "description": "Sets the color used as ANSI white.",
+            "type": "string"
+          },
+          "yellow": {
+            "description": "Sets the color used as ANSI yellow.",
+            "type": "string"
+          }
+        },
+        "required": [ "background", "black", "blue", "brightBlack", "brightBlue", "brightCyan", "brightGreen", "brightPurple", "brightRed", "brightWhite", "brightYellow", "cyan", "foreground", "green", "name", "purple", "red", "white", "yellow" ],
+        "type": "object"
+      },
+      "type": "array"
     }
   },
-  "required": [ "globals" ],
+  "required": [ "globals", "profiles", "schemes" ],
   "title": "Microsoft Terminal config",
   "type": "object"
 }
