@@ -26,178 +26,6 @@
           "description": "The number of rows displayed in the window upon first load.",
           "type": "integer"
         },
-        "keybindings": {
-          "description": "TODO",
-          "items": {
-            "description": "TODO",
-            "properties": {
-              "command": {
-                "description": "The command executed when the associated key bindings are pressed.",
-                "type": "string"
-              },
-              "keys": {
-                "description": "Defines the key combinations used to call the command.",
-                "items": {
-                  "description": "TODO",
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            },
-            "required": [ "command", "keys" ],
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "profiles": {
-          "description": "TODO",
-          "items": {
-            "description": "TODO",
-            "properties": {
-              "acrylicOpacity": {
-                "default": 0.5,
-                "description": "When useAcrylic is set to true, it sets the transparency of the window for the profile. Accepts floating point values from 0-1.",
-                "maximum": 1,
-                "minimum": 0,
-                "type": "number"
-              },
-              "background": {
-                "$comment": "TODO",
-                "description": "Sets the background color of the profile. Overrides background set in color scheme if colorscheme is set. Uses hex color format: \"#rrggbb\".",
-                "type": "string"
-              },
-              "backgroundImage": {
-                "description": "Sets the file location of the Image to draw over the window background.",
-                "type": "string"
-              },
-              "backgroundImageAlignment": {
-                "$comment": "TODO type list",
-                "default": "center",
-                "description": "Sets how the background image aligns to the boundaries of the window. Possible values: \"center\", \"left\", \"top\", \"right\", \"bottom\", \"topLeft\", \"topRight\", \"bottomLeft\", \"bottomRight\"",
-                "type": "string"
-              },
-              "backgroundImageOpacity": {
-                "default": 1,
-                "description": "Sets the transparency of the background image. Accepts floating point values from 0-1.",
-                "maximum": 1,
-                "minimum": 0,
-                "type": "number"
-              },
-              "backgroundImageStretchMode": {
-                "$comment": "TODO type list",
-                "default": "uniformToFill",
-                "description": "Sets how the background image is resized to fill the window. Possible values: \"none\", \"fill\", \"uniform\", \"uniformToFill\"",
-                "type": "string"
-              },
-              "closeOnExit": {
-                "default": true,
-                "description": "When set to true, the selected tab closes when exit is typed. When set to false, the tab will remain open when exit is typed.",
-                "type": "boolean"
-              },
-              "colorScheme": {
-                "default": "Campbell",
-                "description": "Name of the terminal color scheme to use. Color schemes are defined under schemes.",
-                "type": "string"
-              },
-              "colorTable": {
-                "$comment": "TODO",
-                "description": "Array of colors used in the profile if colorscheme is not set. Colors use hex color format: \"#rrggbb\". Ordering is as follows: [black, red, green, yellow, blue, magenta, cyan, white, bright black, bright red, bright green, bright yellow, bright blue, bright magenta, bright cyan, bright white]",
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "commandline": {
-                "default": "powershell.exe",
-                "description": "Executable used in the profile.",
-                "type": "string"
-              },
-              "cursorColor": {
-                "default": "#FFFFFF",
-                "description": "Sets the cursor color for the profile. Uses hex color format: \"#rrggbb\".",
-                "type": "string"
-              },
-              "cursorHeight": {
-                "description": "Sets the percentage height of the cursor starting from the bottom. Only works when cursorShape is set to \"vintage\". Accepts values from 25-100.",
-                "maximum": 100,
-                "minimum": 25,
-                "type": "integer"
-              },
-              "cursorShape": {
-                "$comment": "TODO type list",
-                "default": "bar",
-                "description": "Sets the cursor shape for the profile. Possible values: \"vintage\" ( ▃ ), \"bar\" ( ┃ ), \"underscore\" ( ▁ ), \"filledBox\" ( █ ), \"emptyBox\" ( ▯ )",
-                "type": "string"
-              },
-              "fontFace": {
-                "default": "Consolas",
-                "description": "Name of the font face used in the profile. We will try to fallback to Consolas if this can't be found or is invalid.",
-                "type": "string"
-              },
-              "fontSize": {
-                "default": 10,
-                "description": "Sets the font size.",
-                "type": "integer"
-              },
-              "foreground": {
-                "description": "Sets the foreground color of the profile. Overrides foreground set in color scheme if colorscheme is set. Uses hex color format: \"#rrggbb\".",
-                "type": "string"
-              },
-              "guid": {
-                "description": "Unique identifier of the profile. Written in registry format: \"{00000000-0000-0000-0000-000000000000}\".",
-                "type": "string"
-              },
-              "historySize": {
-                "default": 9001,
-                "description": "The number of lines above the ones displayed in the window you can scroll back to.",
-                "type": "integer"
-              },
-              "icon": {
-                "description": "Image file location of the icon used in the profile. Displays within the tab and the dropdown menu.",
-                "type": "string"
-              },
-              "name": {
-                "default": "PowerShell Core",
-                "description": "Name of the profile. Displays in the dropdown menu.",
-                "type": "string"
-              },
-              "padding": {
-                "default": "0, 0, 0, 0",
-                "description": "Sets the padding around the text within the window. Can have three different formats: \"#\" sets the same padding for all sides, \"#, #\" sets the same padding for left-right and top-bottom, and \"#, #, #, #\" sets the padding individually for left, top, right, and bottom.",
-                "type": "string"
-              },
-              "scrollbarState": {
-                "$comment": "TODO typelist",
-                "description": "Defines the visibility of the scrollbar. Possible values: \"visible\", \"hidden\"",
-                "type": "string"
-              },
-              "snapOnInput": {
-                "default": true,
-                "description": "When set to true, the window will scroll to the command input line when typing. When set to false, the window will not scroll when you start typing.",
-                "type": "boolean"
-              },
-              "startingDirectory": {
-                "default": "%USERPROFILE%",
-                "description": "The directory the shell starts in when it is loaded.",
-                "type": "string"
-              },
-              "tabTitle": {
-                "description": "Overrides default title of the tab.",
-                "type": "string"
-              },
-              "useAcrylic": {
-                "default": false,
-                "description": "When set to true, the window will have an acrylic background. When set to false, the window will have a plain, untextured background.",
-                "type": "boolean"
-              }
-            },
-            "required": [ "acrylicOpacity", "closeOnExit", "colorScheme", "commandline", "cursorColor", "cursorShape", "fontFace", "fontSize", "guid", "historySize", "name", "padding", "snapOnInput", "startingDirectory", "useAcrylic" ],
-            "type": "object"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
         "requestedTheme": {
           "default": "system",
           "description": "\"Sets the theme of the application. Possible values: \"light\", \"dark\", \"system\"\"",
@@ -307,6 +135,178 @@
         }
       },
       "required": [ "alwaysShowTabs", "defaultProfile", "initialCols", "initialRows", "requestedTheme", "showTerminalTitleInTitlebar" ]
+    },
+    "keybindings": {
+      "description": "TODO",
+      "items": {
+        "description": "TODO",
+        "properties": {
+          "command": {
+            "description": "The command executed when the associated key bindings are pressed.",
+            "type": "string"
+          },
+          "keys": {
+            "description": "Defines the key combinations used to call the command.",
+            "items": {
+              "description": "TODO",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [ "command", "keys" ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "profiles": {
+      "description": "TODO",
+      "items": {
+        "description": "TODO",
+        "properties": {
+          "acrylicOpacity": {
+            "default": 0.5,
+            "description": "When useAcrylic is set to true, it sets the transparency of the window for the profile. Accepts floating point values from 0-1.",
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "background": {
+            "$comment": "TODO",
+            "description": "Sets the background color of the profile. Overrides background set in color scheme if colorscheme is set. Uses hex color format: \"#rrggbb\".",
+            "type": "string"
+          },
+          "backgroundImage": {
+            "description": "Sets the file location of the Image to draw over the window background.",
+            "type": "string"
+          },
+          "backgroundImageAlignment": {
+            "$comment": "TODO type list",
+            "default": "center",
+            "description": "Sets how the background image aligns to the boundaries of the window. Possible values: \"center\", \"left\", \"top\", \"right\", \"bottom\", \"topLeft\", \"topRight\", \"bottomLeft\", \"bottomRight\"",
+            "type": "string"
+          },
+          "backgroundImageOpacity": {
+            "default": 1,
+            "description": "Sets the transparency of the background image. Accepts floating point values from 0-1.",
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "backgroundImageStretchMode": {
+            "$comment": "TODO type list",
+            "default": "uniformToFill",
+            "description": "Sets how the background image is resized to fill the window. Possible values: \"none\", \"fill\", \"uniform\", \"uniformToFill\"",
+            "type": "string"
+          },
+          "closeOnExit": {
+            "default": true,
+            "description": "When set to true, the selected tab closes when exit is typed. When set to false, the tab will remain open when exit is typed.",
+            "type": "boolean"
+          },
+          "colorScheme": {
+            "default": "Campbell",
+            "description": "Name of the terminal color scheme to use. Color schemes are defined under schemes.",
+            "type": "string"
+          },
+          "colorTable": {
+            "$comment": "TODO",
+            "description": "Array of colors used in the profile if colorscheme is not set. Colors use hex color format: \"#rrggbb\". Ordering is as follows: [black, red, green, yellow, blue, magenta, cyan, white, bright black, bright red, bright green, bright yellow, bright blue, bright magenta, bright cyan, bright white]",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "commandline": {
+            "default": "powershell.exe",
+            "description": "Executable used in the profile.",
+            "type": "string"
+          },
+          "cursorColor": {
+            "default": "#FFFFFF",
+            "description": "Sets the cursor color for the profile. Uses hex color format: \"#rrggbb\".",
+            "type": "string"
+          },
+          "cursorHeight": {
+            "description": "Sets the percentage height of the cursor starting from the bottom. Only works when cursorShape is set to \"vintage\". Accepts values from 25-100.",
+            "maximum": 100,
+            "minimum": 25,
+            "type": "integer"
+          },
+          "cursorShape": {
+            "$comment": "TODO type list",
+            "default": "bar",
+            "description": "Sets the cursor shape for the profile. Possible values: \"vintage\" ( ▃ ), \"bar\" ( ┃ ), \"underscore\" ( ▁ ), \"filledBox\" ( █ ), \"emptyBox\" ( ▯ )",
+            "type": "string"
+          },
+          "fontFace": {
+            "default": "Consolas",
+            "description": "Name of the font face used in the profile. We will try to fallback to Consolas if this can't be found or is invalid.",
+            "type": "string"
+          },
+          "fontSize": {
+            "default": 10,
+            "description": "Sets the font size.",
+            "type": "integer"
+          },
+          "foreground": {
+            "description": "Sets the foreground color of the profile. Overrides foreground set in color scheme if colorscheme is set. Uses hex color format: \"#rrggbb\".",
+            "type": "string"
+          },
+          "guid": {
+            "description": "Unique identifier of the profile. Written in registry format: \"{00000000-0000-0000-0000-000000000000}\".",
+            "type": "string"
+          },
+          "historySize": {
+            "default": 9001,
+            "description": "The number of lines above the ones displayed in the window you can scroll back to.",
+            "type": "integer"
+          },
+          "icon": {
+            "description": "Image file location of the icon used in the profile. Displays within the tab and the dropdown menu.",
+            "type": "string"
+          },
+          "name": {
+            "default": "PowerShell Core",
+            "description": "Name of the profile. Displays in the dropdown menu.",
+            "type": "string"
+          },
+          "padding": {
+            "default": "0, 0, 0, 0",
+            "description": "Sets the padding around the text within the window. Can have three different formats: \"#\" sets the same padding for all sides, \"#, #\" sets the same padding for left-right and top-bottom, and \"#, #, #, #\" sets the padding individually for left, top, right, and bottom.",
+            "type": "string"
+          },
+          "scrollbarState": {
+            "$comment": "TODO typelist",
+            "description": "Defines the visibility of the scrollbar. Possible values: \"visible\", \"hidden\"",
+            "type": "string"
+          },
+          "snapOnInput": {
+            "default": true,
+            "description": "When set to true, the window will scroll to the command input line when typing. When set to false, the window will not scroll when you start typing.",
+            "type": "boolean"
+          },
+          "startingDirectory": {
+            "default": "%USERPROFILE%",
+            "description": "The directory the shell starts in when it is loaded.",
+            "type": "string"
+          },
+          "tabTitle": {
+            "description": "Overrides default title of the tab.",
+            "type": "string"
+          },
+          "useAcrylic": {
+            "default": false,
+            "description": "When set to true, the window will have an acrylic background. When set to false, the window will have a plain, untextured background.",
+            "type": "boolean"
+          }
+        },
+        "required": [ "acrylicOpacity", "closeOnExit", "colorScheme", "commandline", "cursorColor", "cursorShape", "fontFace", "fontSize", "guid", "historySize", "name", "padding", "snapOnInput", "startingDirectory", "useAcrylic" ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
     }
   },
   "required": [ "globals" ],
