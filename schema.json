@@ -1,7 +1,25 @@
 {
   "$id": "https://raw.githubusercontent.com/SebastianSpeitel/terminal_schema/master/schema.json",
   "$schema": "http://json-schema.org/draft-07/schema",
-  "description": "Config file for the Microsoft Terminal",
+  "description": "Config file for the Windows Terminal",
+  "definitions": {
+    "hexColor": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "guid": {
+      "type": "string",
+      "pattern": "{\\d{8}(-\\d{4}){3}-\\d{12}}"
+    },
+    "filePath": {
+      "type": "string",
+      "$comment": "TODO: pattern"
+    },
+    "path": {
+      "type": "string",
+      "$comment": "TODO: pattern"
+    }
+  },
   "properties": {
     "globals": {
       "description": "Globals",
@@ -18,7 +36,7 @@
           "type": "boolean"
         },
         "defaultProfile": {
-          "type": "string",
+          "@ref": "#/definitions/guid",
           "description": "Sets the default profile. Opens by typing Ctrl + T or by clicking the '+' icon. The guid of the desired default profile is used as the value."
         },
         "initialCols": {
@@ -60,7 +78,12 @@
         "requestedTheme": {
           "default": "system",
           "description": "\"Sets the theme of the application. Possible values: \"light\", \"dark\", \"system\"\"",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "light",
+            "dark",
+            "system"
+          ]
         },
         "showTabsInTitlebar": {
           "default": true,
@@ -100,19 +123,28 @@
             "type": "number"
           },
           "background": {
-            "$comment": "TODO",
-            "description": "Sets the background color of the profile. Overrides background set in color scheme if colorscheme is set. Uses hex color format: \"#rrggbb\".",
-            "type": "string"
+            "@ref": "#/definitions/hexColor",
+            "description": "Sets the background color of the profile. Overrides background set in color scheme if colorscheme is set. Uses hex color format: \"#rrggbb\"."
           },
           "backgroundImage": {
-            "description": "Sets the file location of the Image to draw over the window background.",
-            "type": "string"
+            "@ref": "#/defintions/filePath",
+            "description": "Sets the file location of the Image to draw over the window background."
           },
           "backgroundImageAlignment": {
-            "$comment": "TODO type list",
             "default": "center",
             "description": "Sets how the background image aligns to the boundaries of the window. Possible values: \"center\", \"left\", \"top\", \"right\", \"bottom\", \"topLeft\", \"topRight\", \"bottomLeft\", \"bottomRight\"",
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "center",
+              "left",
+              "top",
+              "right",
+              "bottom",
+              "topLeft",
+              "topRight",
+              "bottomLeft",
+              "bottomRight"
+            ]
           },
           "backgroundImageOpacity": {
             "default": 1,
@@ -122,10 +154,15 @@
             "type": "number"
           },
           "backgroundImageStretchMode": {
-            "$comment": "TODO type list",
             "default": "uniformToFill",
             "description": "Sets how the background image is resized to fill the window. Possible values: \"none\", \"fill\", \"uniform\", \"uniformToFill\"",
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "none",
+              "fill",
+              "uniform",
+              "uniformToFill"
+            ]
           },
           "closeOnExit": {
             "default": true,
@@ -133,27 +170,29 @@
             "type": "boolean"
           },
           "colorScheme": {
+            "$comment": "TODO: only allow strings defined under schemes",
             "default": "Campbell",
             "description": "Name of the terminal color scheme to use. Color schemes are defined under schemes.",
             "type": "string"
           },
           "colorTable": {
-            "$comment": "TODO",
             "description": "Array of colors used in the profile if colorscheme is not set. Colors use hex color format: \"#rrggbb\". Ordering is as follows: [black, red, green, yellow, blue, magenta, cyan, white, bright black, bright red, bright green, bright yellow, bright blue, bright magenta, bright cyan, bright white]",
             "items": {
-              "type": "string"
+              "@ref": "#/definitions/hexColor"
             },
-            "type": "array"
+            "type": "array",
+            "minItems": 16,
+            "maxItems": 16
           },
           "commandline": {
+            "@ref": "#/definitions/filePath",
             "default": "powershell.exe",
-            "description": "Executable used in the profile.",
-            "type": "string"
+            "description": "Executable used in the profile."
           },
           "cursorColor": {
+            "@ref": "#/definitions/hexColor",
             "default": "#FFFFFF",
-            "description": "Sets the cursor color for the profile. Uses hex color format: \"#rrggbb\".",
-            "type": "string"
+            "description": "Sets the cursor color for the profile. Uses hex color format: \"#rrggbb\"."
           },
           "cursorHeight": {
             "description": "Sets the percentage height of the cursor starting from the bottom. Only works when cursorShape is set to \"vintage\". Accepts values from 25-100.",
@@ -162,10 +201,16 @@
             "type": "integer"
           },
           "cursorShape": {
-            "$comment": "TODO type list",
             "default": "bar",
             "description": "Sets the cursor shape for the profile. Possible values: \"vintage\" ( ▃ ), \"bar\" ( ┃ ), \"underscore\" ( ▁ ), \"filledBox\" ( █ ), \"emptyBox\" ( ▯ )",
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "vintage",
+              "bar",
+              "underscore",
+              "filledBox",
+              "emptyBox"
+            ]
           },
           "fontFace": {
             "default": "Consolas",
@@ -178,12 +223,12 @@
             "type": "integer"
           },
           "foreground": {
-            "description": "Sets the foreground color of the profile. Overrides foreground set in color scheme if colorscheme is set. Uses hex color format: \"#rrggbb\".",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the foreground color of the profile. Overrides foreground set in color scheme if colorscheme is set. Uses hex color format: \"#rrggbb\"."
           },
           "guid": {
-            "description": "Unique identifier of the profile. Written in registry format: \"{00000000-0000-0000-0000-000000000000}\".",
-            "type": "string"
+            "@ref": "#/definitions/guid",
+            "description": "Unique identifier of the profile. Written in registry format: \"{00000000-0000-0000-0000-000000000000}\"."
           },
           "historySize": {
             "default": 9001,
@@ -191,8 +236,8 @@
             "type": "integer"
           },
           "icon": {
-            "description": "Image file location of the icon used in the profile. Displays within the tab and the dropdown menu.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Image file location of the icon used in the profile. Displays within the tab and the dropdown menu."
           },
           "name": {
             "default": "PowerShell Core",
@@ -202,12 +247,17 @@
           "padding": {
             "default": "0, 0, 0, 0",
             "description": "Sets the padding around the text within the window. Can have three different formats: \"#\" sets the same padding for all sides, \"#, #\" sets the same padding for left-right and top-bottom, and \"#, #, #, #\" sets the padding individually for left, top, right, and bottom.",
-            "type": "string"
+            "type": "string",
+            "pattern": "^\\d+(, *\\d+(, *\\d+, *\\d+)?)?$",
+            "$comment": "TODO: May allow decimal values"
           },
           "scrollbarState": {
-            "$comment": "TODO typelist",
             "description": "Defines the visibility of the scrollbar. Possible values: \"visible\", \"hidden\"",
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "visible",
+              "hidden"
+            ]
           },
           "snapOnInput": {
             "default": true,
@@ -215,9 +265,9 @@
             "type": "boolean"
           },
           "startingDirectory": {
+            "@ref": "#/definitions/path",
             "default": "%USERPROFILE%",
-            "description": "The directory the shell starts in when it is loaded.",
-            "type": "string"
+            "description": "The directory the shell starts in when it is loaded."
           },
           "tabTitle": {
             "description": "If set, will replace the `name` as the title to pass to the shell on startup. Some shells (like `bash`) may choose to ignore this initial value, while others (`cmd`, `powershell`) may use this value over the lifetime of the application.",
@@ -258,80 +308,80 @@
         "description": "TODO",
         "properties": {
           "background": {
-            "description": "Sets the background color of the color scheme.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the background color of the color scheme."
           },
           "black": {
-            "description": "Sets the color used as ANSI black.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI black."
           },
           "blue": {
-            "description": "Sets the color used as ANSI blue.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI blue."
           },
           "brightBlack": {
-            "description": "Sets the color used as ANSI bright black.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI bright black."
           },
           "brightBlue": {
-            "description": "Sets the color used as ANSI bright blue.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI bright blue."
           },
           "brightCyan": {
-            "description": "Sets the color used as ANSI bright cyan.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI bright cyan."
           },
           "brightGreen": {
-            "description": "Sets the color used as ANSI bright green.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI bright green."
           },
           "brightPurple": {
-            "description": "Sets the color used as ANSI bright purple.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI bright purple."
           },
           "brightRed": {
-            "description": "Sets the color used as ANSI bright red.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI bright red."
           },
           "brightWhite": {
-            "description": "Sets the color used as ANSI bright white.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI bright white."
           },
           "brightYellow": {
-            "description": "Sets the color used as ANSI bright yellow.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI bright yellow."
           },
           "cyan": {
-            "description": "Sets the color used as ANSI cyan.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI cyan."
           },
           "foreground": {
-            "description": "Sets the foreground color of the color scheme.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the foreground color of the color scheme."
           },
           "green": {
-            "description": "Sets the color used as ANSI green.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI green."
           },
           "name": {
             "description": "Name of the color scheme.",
             "type": "string"
           },
           "purple": {
-            "description": "Sets the color used as ANSI purple.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI purple."
           },
           "red": {
-            "description": "Sets the color used as ANSI red.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI red."
           },
           "white": {
-            "description": "Sets the color used as ANSI white.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI white."
           },
           "yellow": {
-            "description": "Sets the color used as ANSI yellow.",
-            "type": "string"
+            "@ref": "#/defintions/hexColor",
+            "description": "Sets the color used as ANSI yellow."
           }
         },
         "required": [
@@ -365,6 +415,6 @@
     "profiles",
     "schemes"
   ],
-  "title": "Microsoft Terminal config",
+  "title": "Windows Terminal config",
   "type": "object"
 }
